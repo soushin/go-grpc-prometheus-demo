@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  grpcserver:
+    container_name: grpcserver
+    build: ./server
+    ports:
+      - 8080:8080
+    environment:
+      GRPC_SERVER_HOST: grpcserver
+      GRPC_SERVER_PORT: 8080
+
+  grpcclient:
+    container_name: grpcclient
+    build: ./client
+    ports:
+      - 8081:8081
+    environment:
+      GRPC_SERVER_HOST: grpcserver
+      GRPC_SERVER_PORT: 8080
+      GRPC_CLIENT_HOST: grpcclient
+      GRPC_CLIENT_PORT: 8081
+
+  prometheus:
+    container_name: prometheus
+    build: ./prometheus
+    ports:
+      - 9090:9090
+    depends_on:
+      - grpcserver
+      - grpcclient
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+      - grpcserver
+      - grpcclient

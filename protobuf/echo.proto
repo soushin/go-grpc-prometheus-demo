@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "protobuf";
+package proto;
+
+service EchoService {
+  rpc EchoService (Message) returns (Message) {}
+}
+
+message Message {
+  string message = 1;
+}
