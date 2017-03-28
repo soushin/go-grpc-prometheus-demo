@@ -50,7 +50,7 @@ From the Grafana menu, choose `Data Sources` and click `Add data source`, then i
 
 - Name: prometheus
 - Type: prometheus
-- Url: http://localhost:9090
+- Url: `http://localhost:9090`
 - Access: direct
 
 At last you can import the dashboard templates from the grafana directory from this repository. From the Grafana menu, choose `Dashboards` and click on `Import`.
